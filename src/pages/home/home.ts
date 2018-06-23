@@ -20,6 +20,11 @@ export class HomePage {
     { name: 'OLFactory', value: '5', width: 20 }
   ];
 
+  completes: any = [
+    { name: 'FLEUR', value: '20', width: 35 },
+    { name: 'OLFactory', value: '5', width: 20 }
+  ];
+
   constructor(public navCtrl: NavController) {
     
   }

@@ -1,4 +1,46 @@
 page-home {
+
+  $blue: #5773FF;
+  $orange: #FD7234;
+  
+  $red: #E53B3A;
+
+  $colors: $blue, $orange, $red;
+
+  @mixin backgrounds($c, $y) {
+    @for $i from 1 through $y {
+      $k: 4%;
+      $j: random($i) - 1;
+
+      @if $i == 1 {
+        .progress-wrapper:nth-child(#{$i}) span { 
+          background: $c; 
+        }
+      }
+      @else {
+        .progress-wrapper:nth-child(#{$i}) span { 
+          background: lighten($c, ($k * $j)); 
+        }
+      }
+    }
+  }
+
+  .card {
+    margin-bottom: 20px;
+
+    &:nth-child(1) {
+      @include backgrounds($blue, 10);
+    }
+
+    &:nth-child(2) { 
+      @include backgrounds($orange, 10);
+    }
+
+    &:nth-child(3) { 
+      @include backgrounds($red, 10);
+    }
+  }
+
   .progress-bar {
     background-color: rgba(120, 132, 158, 0.1);
     height: 32px;
@@ -11,9 +53,8 @@ page-home {
         display: inline-block;
         height: 100%;
         border-radius: 8px;
-        background-color: #5773FF;
         color: #FFFFFF;
-        transition: width .4s ease-in-out;    
+        transition: width .4s ease-in-out;  
     }
   }
 }
