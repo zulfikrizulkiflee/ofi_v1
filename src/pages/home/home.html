@@ -1,14 +1,47 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      Ionic Blank
+      Home
     </ion-title>
+    <ion-buttons end>
+    	<button ion-button id="badge-button" (click)="openNotification()"><ion-icon name="notifications"></ion-icon><ion-badge id="badge" color="danger">2</ion-badge></button>
+      <button ion-button (click)="openOption()"><ion-icon name="settings"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
+  <ion-segment [(ngModel)]="miniReport">
+    <ion-segment-button value="today">
+      Today
+    </ion-segment-button>
+    <ion-segment-button value="week">
+      Week
+    </ion-segment-button>
+    <ion-segment-button value="month">
+      Month
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div [ngSwitch]="miniReport">
+    <ion-list *ngSwitchCase="'today'">
+      <ion-item>
+        <h2>Ruby</h2>
+      </ion-item>
+      ...
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'week'">
+      <ion-item>
+        <h2>Luna</h2>
+      </ion-item>
+      ...
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'month'">
+      <ion-item>
+        <h2>Luna</h2>
+      </ion-item>
+      ...
+    </ion-list>
+  </div>
 </ion-content>
