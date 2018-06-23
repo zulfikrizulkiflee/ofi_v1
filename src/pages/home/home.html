@@ -24,10 +24,18 @@
 <ion-content padding>
   <div [ngSwitch]="miniReport">
     <ion-list *ngSwitchCase="'today'">
-      <ion-item>
-        <h2>Today</h2>
-      </ion-item>
-      ...
+      <ion-card>
+        <ion-card-header>
+          <h1>RM 12345</h1>
+          <h5>Sales</h5>
+        </ion-card-header>
+        <ion-card-content *ngFor="let sale of sales">
+          <h5>{{sale.name}}</h5>
+          <div class="progress-bar">
+            <span [style.width]="sale.width+'%'">RM {{sale.value}}</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
     </ion-list>
 
     <ion-list *ngSwitchCase="'week'">

@@ -1,3 +1,19 @@
 page-home {
-  
+  .progress-bar {
+    background-color: rgba(120, 132, 158, 0.1);
+    height: 32px;
+    width: 100%;
+    border-radius: 8px;
+
+    span {
+        text-align: left;
+        padding: 6px;
+        display: inline-block;
+        height: 100%;
+        border-radius: 8px;
+        background-color: #5773FF;
+        color: #FFFFFF;
+        transition: width .4s ease-in-out;    
+    }
+  }
 }

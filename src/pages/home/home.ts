@@ -10,8 +10,13 @@ export class HomePage {
 
   miniReport: any = 'today';
 
-  constructor(public navCtrl: NavController) {
+  sales: any = [
+    { name: 'FLEUR', value: '123', width: 35 },
+    { name: 'OLFactory', value: '3', width: 20 }
+  ];
 
+  constructor(public navCtrl: NavController) {
+    
   }
 
   openNotification() {
