@@ -26,7 +26,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  
+
   <div [ngSwitch]="miniReport">
     <ion-list *ngSwitchCase="'today'">
       <ion-card>
@@ -35,7 +35,7 @@
           <h5>Sales</h5>
         </ion-card-header>
         <ion-card-content>
-          <div class="progress-wrapper" *ngFor="let sale of sales">
+          <div class="progress-wrapper" *ngFor="let sale of tsales">
             <h5>{{sale.name}}</h5>
             <div class="progress-bar">
               <span [style.width]="sale.width+'%'">RM {{sale.value}}</span>
@@ -50,7 +50,7 @@
           <h5>Orders</h5>
         </ion-card-header>
         <ion-card-content>
-          <div class="progress-wrapper" *ngFor="let order of orders">
+          <div class="progress-wrapper" *ngFor="let order of torders">
             <h5>{{order.name}}</h5>
             <div class="progress-bar">
               <span [style.width]="order.width+'%'">{{order.value}}</span>
@@ -65,7 +65,7 @@
           <h5>Completed Orders</h5>
         </ion-card-header>
         <ion-card-content>
-          <div class="progress-wrapper" *ngFor="let complete of completes">
+          <div class="progress-wrapper" *ngFor="let complete of tcompletes">
             <h5>{{complete.name}}</h5>
             <div class="progress-bar">
               <span [style.width]="complete.width+'%'">{{complete.value}}</span>
@@ -76,17 +76,97 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'week'">
-      <ion-item>
-        <h2>Week</h2>
-      </ion-item>
-      ...
+      <ion-card>
+        <ion-card-header>
+          <h1>RM 12345</h1>
+          <h5>Sales</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let sale of wsales">
+            <h5>{{sale.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="sale.width+'%'">RM {{sale.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <h1>25</h1>
+          <h5>Orders</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let order of worders">
+            <h5>{{order.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="order.width+'%'">{{order.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <h1>25</h1>
+          <h5>Completed Orders</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let complete of wcompletes">
+            <h5>{{complete.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="complete.width+'%'">{{complete.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
     </ion-list>
 
     <ion-list *ngSwitchCase="'month'">
-      <ion-item>
-        <h2>Month</h2>
-      </ion-item>
-      ...
+      <ion-card>
+        <ion-card-header>
+          <h1>RM 12345</h1>
+          <h5>Sales</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let sale of msales">
+            <h5>{{sale.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="sale.width+'%'">RM {{sale.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <h1>25</h1>
+          <h5>Orders</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let order of morders">
+            <h5>{{order.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="order.width+'%'">{{order.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <h1>25</h1>
+          <h5>Completed Orders</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let complete of mcompletes">
+            <h5>{{complete.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="complete.width+'%'">{{complete.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
     </ion-list>
   </div>
 </ion-content>

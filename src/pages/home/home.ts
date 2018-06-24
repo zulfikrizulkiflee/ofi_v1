@@ -10,17 +10,51 @@ export class HomePage {
 
   miniReport: any = 'today';
 
-  sales: any = [
+  tsales: any = [
     { name: 'FLEUR', value: '123', width: 35 },
     { name: 'OLFactory', value: '3', width: 20 }
   ];
 
-  orders: any = [
+  torders: any = [
     { name: 'FLEUR', value: '20', width: 35 },
     { name: 'OLFactory', value: '5', width: 20 }
   ];
 
-  completes: any = [
+  tcompletes: any = [
+    { name: 'FLEUR', value: '20', width: 35 },
+    { name: 'OLFactory', value: '5', width: 20 }
+  ];
+
+  //============================================
+
+  wsales: any = [
+    { name: 'FLEUR', value: '123', width: 35 },
+    { name: 'OLFactory', value: '3', width: 20 }
+  ];
+
+  worders: any = [
+    { name: 'FLEUR', value: '20', width: 35 },
+    { name: 'OLFactory', value: '5', width: 20 }
+  ];
+
+  wcompletes: any = [
+    { name: 'FLEUR', value: '20', width: 35 },
+    { name: 'OLFactory', value: '5', width: 20 }
+  ];
+
+  //============================================
+
+  msales: any = [
+    { name: 'FLEUR', value: '123', width: 35 },
+    { name: 'OLFactory', value: '3', width: 20 }
+  ];
+
+  morders: any = [
+    { name: 'FLEUR', value: '20', width: 35 },
+    { name: 'OLFactory', value: '5', width: 20 }
+  ];
+
+  mcompletes: any = [
     { name: 'FLEUR', value: '20', width: 35 },
     { name: 'OLFactory', value: '5', width: 20 }
   ];

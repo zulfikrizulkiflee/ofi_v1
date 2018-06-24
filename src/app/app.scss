@@ -14,3 +14,17 @@
   right: -3px;
   border-radius: 100%;
 }
+
+.status-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.new {
+  background: red;
+}
+
+.processed {
+  background: green;
+}
