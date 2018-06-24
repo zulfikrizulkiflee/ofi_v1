@@ -9,7 +9,7 @@ export class UserService {
 
   user = {} as User;
 
-  private userDetailsRef = this.db.list<User>('user-details');
+  private userDetailsRef = this.db.list('user-details');
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
     
