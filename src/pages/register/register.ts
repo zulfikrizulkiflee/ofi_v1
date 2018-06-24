@@ -32,35 +32,73 @@ export class RegisterPage {
   ) {}
 
   async register(user: User) {
-    let loading = this.loadingCtrl.create({content : "Please wait..."});
-    loading.present();
-    let alert = this.alertCtrl.create({
-      title: 'Register',
-      subTitle: 'Confirm register?',
-      enableBackdropDismiss: false,
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Okay',
-          handler: () => {
-            this.userS.register(user)
-              .then(data => {
-                loading.dismissAll();
-                this.alertS.show('Registered!', 'Successfully registered');
-                this.navCtrl.setRoot('LoginPage');
-              })
-              .catch(error => {
-                loading.dismissAll();
-                this.alertS.show('Error!', error.message);
-              })
+    if (user.password === user.cpassword && user.email != undefined && user.name != undefined && user.password != undefined) {
+      let loading = this.loadingCtrl.create({content : "Please wait..."});
+      loading.present();
+      let alert = this.alertCtrl.create({
+        title: 'Register',
+        subTitle: 'Confirm register?',
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              loading.dismissAll();
+            }
+          },
+          {
+            text: 'Okay',
+            handler: () => {
+              this.userS.register(user)
+                .then(data => {
+                  this.userS.registerUserDetails(user);
+                  this.userS.logOut()
+                    .then(() => {
+                      loading.dismissAll();
+                      this.alertS.show('Registered!', 'Successfully registered');
+                      this.navCtrl.setRoot('LoginPage');
+                    });
+                })
+                .catch(error => {
+                  loading.dismissAll();
+                  this.alertS.show('Error!', error.message);
+                })
+            }
           }
-        }
-      ]
-    });
-    alert.present();
+        ]
+      });
+      alert.present();
+    } else {
+      if (user.name == undefined || user.email == undefined || user.password == undefined) {
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'Please fill up all fields.',
+          enableBackdropDismiss: false,
+          buttons: [
+            {
+              text: 'Close',
+              role: 'cancel'
+            },
+          ]
+        });
+        alert.present();
+      } else {
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'Password missmatch.',
+          enableBackdropDismiss: false,
+          buttons: [
+            {
+              text: 'Close',
+              role: 'cancel'
+            },
+          ]
+        });
+        alert.present();
+      }
+    }
+    
   }
 
 }

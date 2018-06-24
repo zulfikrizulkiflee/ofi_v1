@@ -25,6 +25,10 @@ export class OptionsPage {
     private app: App
   ) {}
 
+  viewProfile() {
+    this.navCtrl.push('ProfilePage');
+  }
+
   logOut() {
     
     let alert = this.alertCtrl.create({

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { User } from './../../models/user/user.model';
 
@@ -8,7 +9,9 @@ export class UserService {
 
   user = {} as User;
 
-  constructor(private afAuth: AngularFireAuth) {
+  private userDetailsRef = this.db.list<User>('user-details');
+
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
     
   }
 
@@ -22,5 +25,15 @@ export class UserService {
 
   register(user: User) {
     return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+  }
+
+  registerUserDetails(user: User) {
+    const userDetails = {
+      uid: this.afAuth.auth.currentUser.uid,
+      name: user.name,
+      email: user.email
+    };
+
+    return this.userDetailsRef.push(userDetails);
   }
 }

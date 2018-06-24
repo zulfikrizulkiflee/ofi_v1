@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, App } from 'ionic-angular';
 
 import { UserService } from './../../services/user/user.service';
 import { AlertService } from './../../services/component/alert.service';
@@ -28,6 +28,7 @@ export class LoginPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public loadingCtrl: LoadingController, 
+    public alertCtrl: AlertController,
     private userS: UserService,
     private alertS: AlertService,
     private afAuth: AngularFireAuth,
@@ -35,17 +36,34 @@ export class LoginPage {
   ) {}
 
   async login(user: User) {
-    let loading = this.loadingCtrl.create({content : "Loging in..."});
-    loading.present();
-    this.userS.login(user)
-      .then(data => {
-        loading.dismissAll();
-        this.app.getRootNavs()[0].setRoot('TabsPage');
-      })
-      .catch(error => {
-        loading.dismissAll();
-        this.alertS.show('Error!', error.message);
-      })
+    if (user.email != undefined && user.password != undefined) {
+      let loading = this.loadingCtrl.create({content : "Loging in..."});
+      loading.present();
+      this.userS.login(user)
+        .then(data => {
+          loading.dismissAll();
+          this.app.getRootNavs()[0].setRoot('TabsPage');
+        })
+        .catch(error => {
+          loading.dismissAll();
+          this.alertS.show('Error!', error.message);
+        })
+        } else {
+      if (user.email == undefined || user.password == undefined) {
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'Please fill up all fields.',
+          enableBackdropDismiss: false,
+          buttons: [
+            {
+              text: 'Close',
+              role: 'cancel'
+            },
+          ]
+        });
+        alert.present();
+      }
+    }
   }
 
   register() {
