@@ -1,0 +1,30 @@
+<!--
+  Generated template for the EditProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngFor="let userD of user | async">
+    <ion-list *ngIf="userD.uid === uid">
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="userD.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Phone Number</ion-label>
+        <ion-input type="text" [(ngModel)]="userD.phone"></ion-input>
+      </ion-item>
+      <button ion-button block (click)="saveUser(userD)">Save</button>
+    </ion-list>  
+  </div>
+</ion-content>

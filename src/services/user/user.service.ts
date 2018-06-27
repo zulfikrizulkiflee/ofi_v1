@@ -36,4 +36,12 @@ export class UserService {
 
     return this.userDetailsRef.push(userDetails);
   }
+
+  getUserDetails() {
+    return this.userDetailsRef.snapshotChanges();
+  }
+
+  editUser(user: User) {
+    return this.userDetailsRef.update(user.key, user);
+  }
 }

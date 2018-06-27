@@ -9,7 +9,7 @@
   <ion-navbar color="primary">
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="updateProfile()"><ion-icon name="create"></ion-icon></button>
+      <button ion-button navPush="EditProfilePage" [navParams]="{user: user}"><ion-icon name="create"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 
@@ -17,5 +17,27 @@
 
 
 <ion-content padding>
-  
+  <div *ngFor="let userD of user | async">
+    <ion-list *ngIf="userD.uid === uid">
+
+      <ion-item>
+
+        Name: {{userD.name}}
+
+      </ion-item>
+
+      <ion-item>
+
+        Email: {{userD.email}}
+
+      </ion-item>
+
+      <ion-item>
+
+        Phone Number: {{userD.phone}}
+
+      </ion-item>
+
+    </ion-list>
+  </div>
 </ion-content>

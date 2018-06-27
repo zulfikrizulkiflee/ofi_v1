@@ -9,7 +9,7 @@
   <ion-navbar color="primary">
     <ion-title>Products</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="addProduct()"><ion-icon name="add"></ion-icon></button>
+      <button ion-button navPush="AddProductPage"><ion-icon name="add"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 
@@ -17,5 +17,15 @@
 
 
 <ion-content padding>
-
+  <ion-list *ngFor="let product of products; let i = index">
+    <ion-item (click)="presentProductModal(i)">
+      <ion-avatar item-start>
+        <img src="img/avatar-finn.png">
+      </ion-avatar>
+      <h2>
+        {{ product.brand }}
+      </h2>
+      {{ product.variant.length }} product<span *ngIf="product.variant.length > 1">s</span>
+    </ion-item>
+  </ion-list>
 </ion-content>
