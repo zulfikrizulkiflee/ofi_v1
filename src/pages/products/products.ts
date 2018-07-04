@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireDatabase} from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import { ProductService } from './../../services/product/product.service';
 
 /**
  * Generated class for the ProductsPage page.
@@ -15,16 +21,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProductsPage {
 
-  products: any = [
-    { id: 1, brand: 'FLEUR', variant: ['Orly Orange', 'Lavender'] },
-    { id: 2, brand: 'OLFactory', variant: ['asda'] }
-  ];
+  // products: any = [
+  //   { id: 1, brand: 'FLEUR', variant: ['Orly Orange', 'Lavender'] },
+  //   { id: 2, brand: 'OLFactory', variant: ['asda'] }
+  // ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  products: Observable<any>;
+
+  uid = this.afAuth.auth.currentUser.uid;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, private afAuth: AngularFireAuth, private productS: ProductService) {
+    this.products = this.productS.getProductDetails()
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key,
+          ...c.payload.val(),
+        }));
+      });
+    console.log(this.products);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductsPage');
+    
   }
 
 }
