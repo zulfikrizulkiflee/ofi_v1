@@ -1,9 +1,9 @@
 export interface Order {
 	key: string;
-	total_price: any;
+	total_price: number;
 	total_quantity: any;
-	variant?: any;
-	date: string;
+	variant_order?: any;
+	date: any;
 	uid: string;
 	status: string;
 }
