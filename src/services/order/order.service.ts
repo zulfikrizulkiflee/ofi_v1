@@ -21,7 +21,8 @@ export class OrderService {
       key: order.key,
       total_quantity: order.total_quantity,
       total_price: order.total_price,
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      status: 'New'
     };
 
     return this.orderDetailsRef.push(orderDetails);
