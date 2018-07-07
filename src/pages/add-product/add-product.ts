@@ -24,6 +24,7 @@ export class AddProductPage {
 
   product = {} as Product;
   variant = {} as Variant;
+  variantArr = [];
 
   constructor(
     public navCtrl: NavController, 
@@ -33,6 +34,13 @@ export class AddProductPage {
     private alertS: AlertService,
     private alertCtrl: AlertController
   ) {}
+
+  ionViewWillEnter() {
+    this.variant = this.navParams.get('variant')|| null;
+    if (this.variant != null) {
+      this.variantArr.push(this.variant);
+    }
+  } 
 
   async create(product: Product) {
     if (product.name != undefined && product.price != undefined) {
@@ -53,6 +61,10 @@ export class AddProductPage {
           {
             text: 'Okay',
             handler: () => {
+              if (this.variantArr.length > 0) {
+                product.variant = this.variantArr;
+              }
+              
               this.productS.create(product)
                 .then(data => {
                   loading.dismissAll();
@@ -82,7 +94,27 @@ export class AddProductPage {
       });
       alert.present();
     }
-    
+  }
+
+  removeVariant(index) {
+    let alert = this.alertCtrl.create({
+        title: 'Remove Variant',
+        subTitle: 'Confirm to remove variant?',
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Okay',
+            handler: () => {
+              this.variantArr.splice(index, 1);
+            }
+          }
+        ]
+      });
+      alert.present();
   }
 
 }

@@ -18,14 +18,25 @@
 
 <ion-content>
   <img src="assets/imgs/default_product.jpg">
-  <ion-item padding>
-    <ion-avatar item-start>
+  <div class="profile-container">
+    <div class="user-avatar">
       <img src="assets/imgs/default_user.jpg">
-    </ion-avatar>
-    <div *ngFor="let userD of user | async">
-      <h2 *ngIf="userD.uid === product.uid">{{userD.name}}</h2>
+      <!-- <div *ngFor="let userD of user | async">
+        <h2 *ngIf="userD.uid === product.uid">{{userD.name}}</h2>
+      </div> -->
     </div>
-  </ion-item>
-  
+    <div>
+      <h4>RM{{product.price}}</h4>
+      <p>{{product.description}}</p>
+      <h5 *ngIf="product.variant">Variants</h5>
+      <ion-item *ngFor="let variant of product.variant; let i= index">
+        <h2>{{variant.name}}<span>RM{{variant.price}}</span></h2>
+      </ion-item>
+    </div>
+    <div *ngIf="product.uid != uid">
+      <button ion-button block (click)="singleOrderModal()" *ngIf="product.variant == undefined">Order Now</button>
+      <button ion-button block (click)="variantOrderModal()" *ngIf="product.variant">Order Now</button>
+    </div>
+  </div>
 
 </ion-content>

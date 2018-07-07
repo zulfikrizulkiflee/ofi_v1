@@ -1,3 +1,18 @@
 page-product-info {
+	.profile-container {
+		padding: 0 16px 16px 16px;
+	}
+	span {
+		float: right;
+	}
 
+	.user-avatar {
+		margin-top: -46px;
+		width: 80px;
+		img {
+			border: 3px solid #999;
+			border-radius: 50%;
+		}
+		
+	}
 }

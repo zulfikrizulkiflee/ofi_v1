@@ -20,4 +20,9 @@ export class AddVariantPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
+
+  addVariant(variant: Variant) {
+    this.navCtrl.getPrevious().data.variant = variant;
+    this.navCtrl.pop();
+  }
 }

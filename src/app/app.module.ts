@@ -11,6 +11,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 
 import { UserService } from './../services/user/user.service';
 import { ProductService } from './../services/product/product.service';
+import { OrderService } from './../services/order/order.service';
+
 import { ToastService } from './../services/component/toast.service';
 import { AlertService } from './../services/component/alert.service';
 
@@ -36,6 +38,7 @@ import { MyApp } from './app.component';
     SplashScreen,
     UserService,
     ProductService,
+    OrderService,
     ToastService,
     AlertService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

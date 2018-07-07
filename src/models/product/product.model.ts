@@ -2,8 +2,8 @@ export interface Product {
 	key?: string;
 	uid: any;
 	name: string;
-	// variant: {};
 	price: any;
+	variant?: any;
 	description: string;
 	date: any;
 }
@@ -11,5 +11,4 @@ export interface Product {
 export interface Variant {
 	name: string;
 	price: any;
-	description: string;
 }

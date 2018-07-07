@@ -29,6 +29,12 @@
     <ion-input type="text" [(ngModel)]="product.description"></ion-input>
   </ion-item>
 
+  <h5 *ngIf="variantArr.length > 0">Variants</h5>
+  <ion-item *ngFor="let variant of variantArr; let i= index">
+    <h2>{{variant.name}}<span (click)="removeVariant(i)"><ion-icon name="close"></ion-icon></span></h2>
+    <p>RM{{variant.price}}</p>
+  </ion-item>
+
   <button ion-button clear navPush="AddVariantPage" [disabled]="!product.name || !product.price"><ion-icon name="add"></ion-icon>&nbsp;&nbsp;Add Variant</button>
 
   <button ion-button block (click)="create(product)" [disabled]="!product.name || !product.price">Add</button>

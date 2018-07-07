@@ -19,8 +19,9 @@ export class ProductService {
     const productDetails = {
       uid: this.afAuth.auth.currentUser.uid,
       name: product.name,
-      // variant: product.variant,
+      variant: product.variant,
       price: product.price,
+      description: product.description,
       date: new Date().toISOString()
     };
 
