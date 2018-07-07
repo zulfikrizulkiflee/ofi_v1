@@ -15,7 +15,7 @@ export class OrderService {
     
   }
 
-  createSingleOrder(order: Order) {
+  createSingleOrder(order) {
     const orderDetails = {
       uid: this.afAuth.auth.currentUser.uid,
       key: order.key,
@@ -28,7 +28,7 @@ export class OrderService {
     return this.orderDetailsRef.push(orderDetails);
   }
 
-  createVariantOrder(order: Order) {
+  createVariantOrder(order) {
     const orderDetails = {
       uid: this.afAuth.auth.currentUser.uid,
       key: order.key,
