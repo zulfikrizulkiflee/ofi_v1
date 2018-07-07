@@ -1,0 +1,31 @@
+<!--
+  Generated template for the EditProductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Edit Product</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="deleteProduct(product)"><ion-icon name="trash"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label floating>Name</ion-label>
+    <ion-input type="text" [(ngModel)]="product.name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Price (RM)</ion-label>
+    <ion-input type="text" [(ngModel)]="product.price"></ion-input>
+  </ion-item>
+
+  <button ion-button block (click)="saveProduct(product)">Save</button>
+</ion-content>

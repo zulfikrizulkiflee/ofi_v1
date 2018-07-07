@@ -4,5 +4,12 @@ export interface Product {
 	name: string;
 	// variant: {};
 	price: any;
+	description: string;
 	date: any;
+}
+
+export interface Variant {
+	name: string;
+	price: any;
+	description: string;
 }

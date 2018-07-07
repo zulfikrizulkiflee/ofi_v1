@@ -27,7 +27,7 @@ export class ProductService {
     return this.productDetailsRef.push(productDetails);
   }
 
-  remove(product: Product) {
+  removeProduct(product: Product) {
     return this.productDetailsRef.remove(product.key);
   }
 

@@ -1,0 +1,31 @@
+<!--
+  Generated template for the ProductInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{product?.name}}</ion-title>
+    <ion-buttons end *ngIf="product.uid === uid">
+      <button ion-button navPush="EditProductPage" [navParams]="{product: product}"><ion-icon name="create"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <img src="assets/imgs/default_product.jpg">
+  <ion-item padding>
+    <ion-avatar item-start>
+      <img src="assets/imgs/default_user.jpg">
+    </ion-avatar>
+    <div *ngFor="let userD of user | async">
+      <h2 *ngIf="userD.uid === product.uid">{{userD.name}}</h2>
+    </div>
+  </ion-item>
+  
+
+</ion-content>

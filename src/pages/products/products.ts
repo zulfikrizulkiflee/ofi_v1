@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AngularFireDatabase} from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
@@ -30,7 +30,7 @@ export class ProductsPage {
 
   uid = this.afAuth.auth.currentUser.uid;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, private afAuth: AngularFireAuth, private productS: ProductService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, private afAuth: AngularFireAuth, private productS: ProductService, public modalCtrl: ModalController) {
     this.products = this.productS.getProductDetails()
       .map(changes => {
         return changes.map(c => ({
@@ -38,11 +38,6 @@ export class ProductsPage {
           ...c.payload.val(),
         }));
       });
-    console.log(this.products);
-  }
-
-  ionViewDidLoad() {
-    
   }
 
 }

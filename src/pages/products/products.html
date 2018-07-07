@@ -30,13 +30,13 @@
   </ion-list> -->
   <ion-grid>
     <ion-row>
-      <ion-col col-6 *ngFor="let product of products | async; let i = index">
-        <ion-card>
-          <img src="img/nin-live.png"/>
+      <ion-col col-6 *ngFor="let product of products | async">
+        <ion-card  detail-push navPush="ProductInfoPage" [navParams]="{product: product}">
+          <img src="assets/imgs/default_product.jpg"/>
           <ion-card-content>
-            <ion-card-title>
+            <h2>
               {{ product.name }}
-            </ion-card-title>
+            </h2>
             <p>
               RM{{ product.price }}
             </p>

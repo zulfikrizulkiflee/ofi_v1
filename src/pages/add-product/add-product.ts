@@ -5,6 +5,7 @@ import { ProductService } from './../../services/product/product.service';
 import { AlertService } from './../../services/component/alert.service';
 
 import { Product } from '../../models/product/product.model';
+import { Variant } from '../../models/product/product.model';
 
 
 /**
@@ -22,6 +23,7 @@ import { Product } from '../../models/product/product.model';
 export class AddProductPage {
 
   product = {} as Product;
+  variant = {} as Variant;
 
   constructor(
     public navCtrl: NavController, 
