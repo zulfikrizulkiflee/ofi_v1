@@ -23,6 +23,8 @@ export class MyCirclePage {
 
   circleList: Array<any>;
 
+  foundList: Array<any>;
+
   followerStr: string = "Show only Followers";
 
   uid = this.afAuth.auth.currentUser.uid;
@@ -36,13 +38,14 @@ export class MyCirclePage {
     this.circleS.getCircleList()
       .subscribe(res => {
         res.forEach(user => {
-          if(user.followee_uid == this.uid) {
-            this.userS.getSingleUserDetails(user.followee_uid)
+          this.foundList = user;
+          if(this.foundList.followee_uid == this.uid) {
+            this.userS.getSingleUserDetails(this.foundList.followee_uid)
               .subscribe(el => {
                 res.followee_name = el.name;
               }); 
           } else {
-            this.userS.getSingleUserDetails(user.follower_uid)
+            this.userS.getSingleUserDetails(this.foundList.follower_uid)
               .subscribe(el => {
                 res.follower_name = el.name;
               });
