@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { User } from './../../models/user/user.model';
+import { Circle } from './../../models/user/user.model';
 
 @Injectable()
 export class CircleService {
@@ -17,7 +18,7 @@ export class CircleService {
     
   }
 
-  addIntoCircle(user: User) {
+  addIntoCircle(user: Circle) {
     const circleDetails = {
       followee_uid: this.uid,
       follower_uid: user.follower_uid,

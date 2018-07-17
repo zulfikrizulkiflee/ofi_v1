@@ -23,9 +23,9 @@ export class MyCirclePage {
 
   circle: boolean = false;
 
-  circleList: Observable<any>;
+  circleList: Array<any>;
 
-  userDetails:  Observable<any>;
+  userDetails:  Array<any>;
 
   followerStr: string = "Show only Followers";
 
@@ -35,35 +35,13 @@ export class MyCirclePage {
   }
 
   ionViewWillLoad() {
-    this.circleList = this.circleS.getCircleList()
-      .map(changes => {
-        return changes.map(c => ({
-          key: c.payload.key,
-          ...c.payload.val(),
-        }));
+    let loading = this.loadingCtrl.create({content : "Loading..."});
+    loading.present();
+    this.circleS.getCircleList()
+      .subscribe(res => {
+          this.circleList = res;
+          loading.dismissAll();
       });
-    // let loading = this.loadingCtrl.create({content : "Loading..."});
-    // loading.present();
-    // this.circleS.getCircleList()
-    //   .subscribe(res => {
-    //     res.forEach(user => {
-    //       if(user.followee_uid == this.uid) {
-    //         this.userS.getSingleUserDetails(user.followee_uid)
-    //           .subscribe(el => {
-    //             res.followee_name = el.name;
-    //           }); 
-    //       } else {
-    //         this.userS.getSingleUserDetails(user.follower_uid)
-    //           .subscribe(el => {
-    //             res.follower_name = el.name;
-    //           });
-    //       }
-          
-    //     });
-    //     this.circleList = res;
-    //     console.log(this.circleList);
-    //     loading.dismissAll();
-    //   });
   }
 
   updateCircleList() {
