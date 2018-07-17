@@ -23,7 +23,7 @@ export class MyCirclePage {
 
   circleList: Array<any>;
 
-  foundList: Array<any>;
+  foundList: Object<any>;
 
   followerStr: string = "Show only Followers";
 
