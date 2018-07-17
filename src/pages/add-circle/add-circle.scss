@@ -1,0 +1,9 @@
+page-add-circle {
+	span {
+		float: right;
+	}
+
+	.add-btn {
+		color: map-get($colors, primary);
+	}
+}

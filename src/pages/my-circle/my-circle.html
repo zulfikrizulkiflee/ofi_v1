@@ -1,0 +1,44 @@
+<!--
+  Generated template for the MyCirclePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>My Circle</ion-title>
+    <ion-buttons end>
+      <button ion-button navPush="AddCirclePage"><ion-icon name="person-add"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>{{ followerStr }}</ion-label>
+    <ion-toggle [(ngModel)]="circle" (ionChange)="updateCircleList()"></ion-toggle>
+  </ion-item>
+  <ion-list [hidden]="circle == true" *ngFor="let user of circleList">
+    <ion-item *ngIf="user.followee_uid == uid">
+      <ion-avatar item-start>
+        <img src="assets/imgs/default_user.jpg">
+      </ion-avatar>
+      <h2>
+        <h5>{{ user.follower_name }}</h5>
+      </h2>
+    </ion-item>
+  </ion-list>
+  <ion-list [hidden]="circle == false" *ngFor="let user of circleList">
+    <ion-item  *ngIf="user.follower_uid == uid">
+      <ion-avatar item-start>
+        <img src="assets/imgs/default_user.jpg">
+      </ion-avatar>
+      <h2>
+        <h5>{{ user.follower_name }}</h5>
+      </h2>
+    </ion-item>
+  </ion-list>
+</ion-content>

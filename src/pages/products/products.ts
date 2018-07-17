@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { AngularFireDatabase} from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
@@ -30,9 +30,12 @@ export class ProductsPage {
 
   uid = this.afAuth.auth.currentUser.uid;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, private afAuth: AngularFireAuth, private productS: ProductService, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, private afAuth: AngularFireAuth, private productS: ProductService, public modalCtrl: ModalController, private loadingCtrl: LoadingController) {
+    let loading = this.loadingCtrl.create({content : "Loading..."});
+    loading.present();
     this.products = this.productS.getProductDetails()
       .map(changes => {
+        loading.dismissAll();
         return changes.map(c => ({
           key: c.payload.key,
           ...c.payload.val(),

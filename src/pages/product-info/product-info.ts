@@ -26,7 +26,7 @@ import { AlertService } from './../../services/component/alert.service';
 export class ProductInfoPage {
   product: Product;
 
-  user: Observable<any>;
+  users: Observable<any>;
 
   uid = this.afAuth.auth.currentUser.uid;
 
@@ -36,7 +36,7 @@ export class ProductInfoPage {
   ionViewWillLoad() {
     this.product = this.navParams.get('product');
 
-    this.user = this.userS.getUserDetails()
+    this.users = this.userS.getUserDetails()
       .map(changes => {
         return changes.map(c => ({
           key: c.payload.key,
@@ -45,7 +45,7 @@ export class ProductInfoPage {
       });
   }
 
-  singleOrderModal() {
+  singleOrderModal(to_uid, from_name) {
     let alert = this.alertCtrl.create({
       title: this.product.name,
       subTitle: 'Insert quantity',
@@ -68,6 +68,10 @@ export class ProductInfoPage {
             loading.present();
             const orderDetails = {
               key: this.product.key,
+              product_name: this.product.name,
+              to_name: this.product.owner_name,
+              from_name: from_name,
+              to_uid: to_uid,
               total_quantity: data.quantity,
               total_price: data.quantity * this.product.price
             }
@@ -83,7 +87,7 @@ export class ProductInfoPage {
     alert.present();
   }
 
-  variantOrderModal() {
+  variantOrderModal(to_uid, from_name) {
     let inputs = [];
     this.product.variant.forEach(function(element, index) {
       let inputEl = {
@@ -112,10 +116,9 @@ export class ProductInfoPage {
             let totalQuantity = 0;
             let variantOrder = [];
             this.product.variant.forEach(function(element, index) {
-              totalPrice += (element.price * data['quantity_' + index]);
-              totalQuantity += parseInt(data['quantity_' + index]);
-
               if (data['quantity_' + index] != 0 || data['quantity_' + index] != "") {
+                totalPrice += (element.price * data['quantity_' + index]);
+                totalQuantity += parseInt(data['quantity_' + index]);
                 variantOrder.push({
                   name: element.name,
                   quantity: data['quantity_' + index],
@@ -126,6 +129,10 @@ export class ProductInfoPage {
 
             const orderDetails = {
               key: this.product.key,
+              product_name: this.product.name,
+              to_name: this.product.owner_name,
+              from_name: from_name,
+              to_uid: to_uid,
               total_quantity: totalQuantity,
               total_price: totalPrice,
               variant_order: variantOrder

@@ -17,18 +17,21 @@
 
 
 <ion-content>
-  <ion-list *ngFor="let order of orders; let i = index">
-    <ion-item (click)="presentOrderModal(i)">
-      <ion-avatar item-start>
-        <img src="img/avatar-finn.png">
-      </ion-avatar>
-      <h2>
-        {{ order.name }}
-        <span *ngIf="order.status === 'new'" class="status-bullet new"></span>
-        <span *ngIf="order.status === 'processed'" class="status-bullet processed"></span>
-      </h2>
-      <h3>{{ order.brand }}</h3>
-      <p>{{ order.quantity }} pcs<span>{{ order.time }}</span></p>
-    </ion-item>
-  </ion-list>
+  <div *ngFor="let order of orders | async">
+    <div *ngIf="order.from_uid == uid || order.to_uid == uid">
+      <ion-item (click)="presentOrderModal(order)">
+        <ion-avatar item-start>
+          <img src="assets/imgs/default_user.jpg">
+        </ion-avatar>
+        <h2>
+          <h5 *ngIf="order.from_uid === uid">{{order.to_name}}</h5>
+          <h5 *ngIf="order.from_uid != uid">{{order.from_name}}</h5>
+          <span *ngIf="order.status === 'New'" class="status-bullet new"></span>
+          <span *ngIf="order.status === 'Processed'" class="status-bullet processed"></span>
+        </h2>
+        <h3>{{ order.product_name }}</h3>
+        <p>{{ order.total_quantity }} pcs<span>{{ order.date }}</span></p>
+      </ion-item>
+    </div>
+  </div>
 </ion-content>

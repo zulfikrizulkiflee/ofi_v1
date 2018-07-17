@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 import { ProductService } from './../../services/product/product.service';
 
 import { Product } from '../../models/product/product.model';
 import { Variant } from '../../models/product/product.model';
 
-import { AlertService } from './../../services/component/alert.service';
 import { ToastService } from './../../services/component/toast.service';
 
 /**
@@ -27,7 +25,7 @@ export class EditProductPage {
 
   variant = {} as Variant;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private productS: ProductService, private afAuth: AngularFireAuth, private toast: ToastService, private alertS: AlertService, private alertCtrl: AlertController, public loadingCtrl: LoadingController,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private productS: ProductService, private toast: ToastService, private alertCtrl: AlertController, public loadingCtrl: LoadingController,) {
   }
 
   ionViewWillEnter() {

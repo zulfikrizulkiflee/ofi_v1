@@ -33,6 +33,5 @@ export class ProfilePage {
           ...c.payload.val(),
         }));
       });
-    console.log(this.user);
   }
 }

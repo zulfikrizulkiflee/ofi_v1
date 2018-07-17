@@ -20,23 +20,37 @@
   <ion-list>
     <ion-item>
       <ion-avatar item-start>
-        <img src="img/avatar-finn.png">
+        <img src="assets/imgs/default_user.jpg">
       </ion-avatar>
-      <h2>{{ data.name }}</h2>
-      <h3>{{ data.brand }}</h3>
+      <h2>{{ order.from_name }}</h2>
+      <h3>{{ order.product_name }}</h3>
       <p>
-        {{ data.time }}
-        <span *ngIf="data.status === 'new'" class="status-bullet new"></span>
-        <span *ngIf="data.status === 'processed'" class="status-bullet processed"></span>
+        {{ order.date }}
+        <span *ngIf="order.status === 'New'" class="status-bullet new right"></span>
+        <span *ngIf="order.status === 'Processed'" class="status-bullet processed right"></span>
       </p>
     </ion-item>
   </ion-list>
-  <ion-item>
-    <h2>{{ data.product }}</h2>
+  <div *ngIf="order.variant">
+    <div *ngFor="let variant of order.variant">
+      <ion-item>
+        <h2>{{ variant.name }}</h2>
+        <h2>{{ variant.quantity }} pcs<span class="right">RM{{ variant.price }}</span></h2>
+      </ion-item>
+    </div>
+  </div>
+  <ion-item *ngIf="!order.variant">
+    <h2>{{ order.product_name }}</h2>
   </ion-item>
   <ion-item>
-    <h2>{{ data.quantity }} pcs<span>{{ data.amount }}</span></h2>
+    <h2>
+      <span>{{ order.total_quantity }} pcs</span>
+      <!-- <span *ngIf="order.variant">Total</span> -->
+      <span class="right">RM{{ order.total_price }}</span>
+    </h2>
   </ion-item>
-  <button ion-button block color="secondary" *ngIf="data.status === 'new'">Processed</button>
-  <button ion-button block color="secondary" *ngIf="data.status === 'processed'">Completed</button>
+  <div *ngIf="order.to_uid === uid">
+    <button ion-button block color="secondary" *ngIf="order.status === 'New'">Processed</button>
+    <button ion-button block color="secondary" *ngIf="order.status === 'Processed'">Completed</button>
+  </div>
 </ion-content>

@@ -35,7 +35,9 @@
     <p>RM{{variant.price}}</p>
   </ion-item>
 
-  <button ion-button clear navPush="AddVariantPage" [disabled]="!product.name || !product.price"><ion-icon name="add"></ion-icon>&nbsp;&nbsp;Add Variant</button>
+  <button ion-button clear navPush="AddVariantPage"><ion-icon name="add"></ion-icon>&nbsp;&nbsp;Add Variant</button>
 
-  <button ion-button block (click)="create(product)" [disabled]="!product.name || !product.price">Add</button>
+  <div *ngFor="let user of users | async">
+    <button ion-button block *ngIf="user.uid === uid" (click)="create(product,user.name)">Add</button>
+  </div>
 </ion-content>

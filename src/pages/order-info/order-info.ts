@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
 /**
  * Generated class for the OrderInfoPage page.
  *
@@ -15,12 +17,16 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 })
 export class OrderInfoPage {
 
-  data = this.navParams.get('data');
+  order = this.navParams.get('order');
+
+  uid = this.afAuth.auth.currentUser.uid;
 
   constructor(
     private navParams: NavParams, 
-    private viewCtrl: ViewController
-    ) {}
+    private viewCtrl: ViewController,
+    private afAuth: AngularFireAuth
+    ) {
+  }
 
   // ionViewWillLoad() {
   //   const data = this.navParams.get('data');

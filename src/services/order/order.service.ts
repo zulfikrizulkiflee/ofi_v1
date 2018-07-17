@@ -17,8 +17,12 @@ export class OrderService {
 
   createSingleOrder(order) {
     const orderDetails = {
-      uid: this.afAuth.auth.currentUser.uid,
+      from_uid: this.afAuth.auth.currentUser.uid,
+      to_uid: order.to_uid,
       key: order.key,
+      product_name: order.product_name,
+      to_name: order.to_name,
+      from_name: order.from_name,
       total_quantity: order.total_quantity,
       total_price: order.total_price,
       date: new Date().toISOString(),
@@ -30,8 +34,12 @@ export class OrderService {
 
   createVariantOrder(order) {
     const orderDetails = {
-      uid: this.afAuth.auth.currentUser.uid,
+      from_uid: this.afAuth.auth.currentUser.uid,
+      to_uid: order.to_uid,
       key: order.key,
+      product_name: order.product_name,
+      to_name: order.to_name,
+      from_name: order.from_name,
       total_quantity: order.total_quantity,
       total_price: order.total_price,
       variant: order.variant_order,

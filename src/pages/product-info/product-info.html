@@ -34,8 +34,12 @@
       </ion-item>
     </div>
     <div *ngIf="product.uid != uid">
-      <button ion-button block (click)="singleOrderModal()" *ngIf="product.variant == undefined">Order Now</button>
-      <button ion-button block (click)="variantOrderModal()" *ngIf="product.variant">Order Now</button>
+      <div *ngFor="let user of users | async">
+        <div *ngIf="user.uid == uid">
+          <button ion-button block (click)="singleOrderModal(product.uid, user.name)" *ngIf="product.variant == ''">Order Now</button>
+          <button ion-button block (click)="variantOrderModal(product.uid, user.name)" *ngIf="product.variant">Order Now</button>
+        </div>
+      </div>
     </div>
   </div>
 

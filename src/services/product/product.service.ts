@@ -19,6 +19,7 @@ export class ProductService {
     const productDetails = {
       uid: this.afAuth.auth.currentUser.uid,
       name: product.name,
+      owner_name: product.owner_name,
       variant: product.variant,
       price: product.price,
       description: product.description,

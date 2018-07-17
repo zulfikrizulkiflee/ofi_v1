@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import { AngularFireAuth } from 'angularfire2/auth';
 
 import { ProductService } from './../../services/product/product.service';
 import { AlertService } from './../../services/component/alert.service';
+import { UserService } from './../../services/user/user.service';
 
 import { Product } from '../../models/product/product.model';
 import { Variant } from '../../models/product/product.model';
@@ -22,6 +27,10 @@ import { Variant } from '../../models/product/product.model';
 })
 export class AddProductPage {
 
+  users: Observable<any>;
+
+  uid = this.afAuth.auth.currentUser.uid;
+
   product = {} as Product;
   variant = {} as Variant;
   variantArr = [];
@@ -32,8 +41,18 @@ export class AddProductPage {
     public loadingCtrl: LoadingController,
     private productS: ProductService,
     private alertS: AlertService,
-    private alertCtrl: AlertController
-  ) {}
+    private alertCtrl: AlertController,
+    private userS: UserService,
+    private afAuth: AngularFireAuth
+  ) {
+    this.users = this.userS.getUserDetails()
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key,
+          ...c.payload.val(),
+        }));
+      });
+  }
 
   ionViewWillEnter() {
     this.variant = this.navParams.get('variant')|| null;
@@ -42,7 +61,7 @@ export class AddProductPage {
     }
   } 
 
-  async create(product: Product) {
+  async create(product: Product, username) {
     if (product.name != undefined && product.price != undefined) {
       let loading = this.loadingCtrl.create({content : "Please wait..."});
       loading.present();
@@ -63,7 +82,14 @@ export class AddProductPage {
             handler: () => {
               if (this.variantArr.length > 0) {
                 product.variant = this.variantArr;
+              } else {
+                product.variant = '';
               }
+
+              product.owner_name = username;
+
+              // product.owner_name = user.name;
+              // console.log(user.name);
               
               this.productS.create(product)
                 .then(data => {

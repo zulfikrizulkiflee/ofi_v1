@@ -41,6 +41,10 @@ export class UserService {
     return this.userDetailsRef.snapshotChanges();
   }
 
+  getSingleUserDetails(uid) {
+    return this.db.list('user-details', ref => ref.orderByChild('uid').equalTo(uid)).valueChanges();
+  }
+
   editUser(user: User) {
     return this.userDetailsRef.update(user.key, user);
   }

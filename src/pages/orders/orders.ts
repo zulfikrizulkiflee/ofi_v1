@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+
+import { OrderService } from './../../services/order/order.service';
 
 /**
  * Generated class for the OrdersPage page.
@@ -15,19 +21,41 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 })
 export class OrdersPage {
 
-  orders: any = [
-    { id: 1, name: 'Ahmad', brand: 'FLEUR', product: 'Car Perfume', quantity: 3,amount: 'RM 123', time: '8 Nov, 9:09 AM', status: 'new' },
-    { id: 2, name: 'Kimi', brand: 'OLFactory', product: 'Men Perfume', quantity: 5,amount: 'RM 123', time: '8 Nov, 9:15 AM', status: 'processed' }
-  ];
+  // orders: any = [
+  //   { id: 1, name: 'Ahmad', brand: 'FLEUR', product: 'Car Perfume', quantity: 3,amount: 'RM 123', time: '8 Nov, 9:09 AM', status: 'new' },
+  //   { id: 2, name: 'Kimi', brand: 'OLFactory', product: 'Men Perfume', quantity: 5,amount: 'RM 123', time: '8 Nov, 9:15 AM', status: 'processed' }
+  // ];
+
+  orders: Observable<any>;
+  users: Observable<any>;
+
+  uid = this.afAuth.auth.currentUser.uid;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
-    public modalCtrl: ModalController
-    ) {}
+    public modalCtrl: ModalController,
+    private loadingCtrl: LoadingController,
+    private orderS: OrderService,
+    private afAuth: AngularFireAuth
+    ) {
+  }
 
-  presentOrderModal(index) {
-    const modalPage = this.modalCtrl.create('OrderInfoPage', { data: this.orders[index] });
+  ionViewWillLoad() {
+    let loading = this.loadingCtrl.create({content : "Loading..."});
+    loading.present();
+    this.orders = this.orderS.getOrderDetails()
+      .map(changes => {
+        loading.dismissAll();
+        return changes.map(c => ({
+          key: c.payload.key,
+          ...c.payload.val(),
+        }));
+      });
+  }
+
+  presentOrderModal(order) {
+    const modalPage = this.modalCtrl.create('OrderInfoPage', { order: order });
     modalPage.present();
   }
 
