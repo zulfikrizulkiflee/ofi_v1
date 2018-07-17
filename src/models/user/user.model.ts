@@ -11,6 +11,6 @@ export interface Circle {
 	followee_name: string;
 	followee_uid: string;
 	follower_name: string;
-	folower_uid: string;
+	follower_uid: string;
 	status: string;
 }
