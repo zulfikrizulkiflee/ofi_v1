@@ -21,9 +21,7 @@ export class MyCirclePage {
 
   circle: boolean = false;
 
-  circleList: Array<any>;
-
-  foundList: Object<any>;
+  circleList: any;
 
   followerStr: string = "Show only Followers";
 
@@ -38,14 +36,13 @@ export class MyCirclePage {
     this.circleS.getCircleList()
       .subscribe(res => {
         res.forEach(user => {
-          this.foundList = user;
-          if(this.foundList.followee_uid == this.uid) {
-            this.userS.getSingleUserDetails(this.foundList.followee_uid)
+          if(user.followee_uid == this.uid) {
+            this.userS.getSingleUserDetails(user.followee_uid)
               .subscribe(el => {
                 res.followee_name = el.name;
               }); 
           } else {
-            this.userS.getSingleUserDetails(this.foundList.follower_uid)
+            this.userS.getSingleUserDetails(user.follower_uid)
               .subscribe(el => {
                 res.follower_name = el.name;
               });
