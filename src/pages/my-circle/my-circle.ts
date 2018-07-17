@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { CircleService } from './../../services/circle/circle.service';
 import { UserService } from './../../services/user/user.service';
-
-import { Circle } from './../../models/user/user.model';
 
 /**
  * Generated class for the MyCirclePage page.
@@ -23,7 +23,9 @@ export class MyCirclePage {
 
   circle: boolean = false;
 
-  circleList: Circle;
+  circleList: Observable<any>;
+
+  userDetails:  Observable<any>;
 
   followerStr: string = "Show only Followers";
 
@@ -33,28 +35,35 @@ export class MyCirclePage {
   }
 
   ionViewWillLoad() {
-    let loading = this.loadingCtrl.create({content : "Loading..."});
-    loading.present();
     this.circleList = this.circleS.getCircleList()
-      .subscribe(res => {
-        res.forEach(user => {
-          if(user.followee_uid == this.uid) {
-            this.userS.getSingleUserDetails(user.followee_uid)
-              .subscribe(el => {
-                res.followee_name = el.name;
-              }); 
-          } else {
-            this.userS.getSingleUserDetails(user.follower_uid)
-              .subscribe(el => {
-                res.follower_name = el.name;
-              });
-          }
-          
-        });
-        this.circleList = res;
-        // console.log(this.circleList);
-        loading.dismissAll();
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key,
+          ...c.payload.val(),
+        }));
       });
+    // let loading = this.loadingCtrl.create({content : "Loading..."});
+    // loading.present();
+    // this.circleS.getCircleList()
+    //   .subscribe(res => {
+    //     res.forEach(user => {
+    //       if(user.followee_uid == this.uid) {
+    //         this.userS.getSingleUserDetails(user.followee_uid)
+    //           .subscribe(el => {
+    //             res.followee_name = el.name;
+    //           }); 
+    //       } else {
+    //         this.userS.getSingleUserDetails(user.follower_uid)
+    //           .subscribe(el => {
+    //             res.follower_name = el.name;
+    //           });
+    //       }
+          
+    //     });
+    //     this.circleList = res;
+    //     console.log(this.circleList);
+    //     loading.dismissAll();
+    //   });
   }
 
   updateCircleList() {

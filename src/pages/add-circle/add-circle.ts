@@ -33,13 +33,26 @@ export class AddCirclePage {
   ionViewDidLoad() {
     this.circleS.getCircleList()
       .subscribe(res => {
-        this.users = res;
+          this.users = res;
       });
   }
 
   onEnterKey() {
-    // let loading = this.loadingCtrl.create({content : "Searching..."});
-    // loading.present();
+    if(this.searchUser != this.email) {
+      let loading = this.loadingCtrl.create({content : "Searching..."});
+      loading.present();
+      this.circleS.searchUser(this.searchUser)
+        .subscribe(res => {
+          loading.dismissAll();
+          this.usersFound = res;
+          
+          // this.circleS.checkUserFollower(this.usersFound.uid)
+          //   .subscribe(found => {
+          //     console.log(found.length);
+          //   });
+        });
+    }
+    // 
     // if(this.searchUser != this.email) {
     //   this.circleS.searchUser(this.searchUser)
     //    .subscribe(queriedItems => {
