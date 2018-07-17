@@ -5,6 +5,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { CircleService } from './../../services/circle/circle.service';
 import { UserService } from './../../services/user/user.service';
 
+import { Circle } from './../../models/user/user.model';
+
 /**
  * Generated class for the MyCirclePage page.
  *
@@ -21,7 +23,7 @@ export class MyCirclePage {
 
   circle: boolean = false;
 
-  circleList: any;
+  circleList: Circle;
 
   followerStr: string = "Show only Followers";
 
@@ -33,7 +35,7 @@ export class MyCirclePage {
   ionViewWillLoad() {
     let loading = this.loadingCtrl.create({content : "Loading..."});
     loading.present();
-    this.circleS.getCircleList()
+    this.circleList = this.circleS.getCircleList()
       .subscribe(res => {
         res.forEach(user => {
           if(user.followee_uid == this.uid) {
