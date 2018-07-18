@@ -36,7 +36,7 @@ export class LoginPage {
   ) {}
 
   async login(user: User) {
-    if (user.email != undefined && user.password != undefined) {
+    if (user.email != undefined && user.password != undefined || user.email != "" || user.password != "") {
       let loading = this.loadingCtrl.create({content : "Loging in..."});
       loading.present();
       this.userS.login(user)
@@ -49,7 +49,7 @@ export class LoginPage {
           this.alertS.show('Error!', error.message);
         })
     } else {
-      if (user.email == undefined || user.password == undefined) {
+      if (user.email == undefined || user.password == undefined || user.email == "" || user.password == "") {
         let alert = this.alertCtrl.create({
           title: 'Error!',
           subTitle: 'Please fill up all fields.',
