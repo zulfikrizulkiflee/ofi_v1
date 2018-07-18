@@ -18,10 +18,10 @@ export class CircleService {
     
   }
 
-  addIntoCircle(user: Circle) {
+  addIntoCircle(user: User) {
     const circleDetails = {
       followee_uid: this.uid,
-      follower_uid: user.follower_uid,
+      follower_uid: user.uid,
       status: 'New'
     };
 
@@ -29,11 +29,15 @@ export class CircleService {
   }
 
   getCircleList() {
-    return this.circleDetailsRef.valueChanges();
+    return this.circleDetailsRef.snapshotChanges();
   }
 
   searchUser(email) {
     return this.db.list('user-details', ref => ref.orderByChild('email').equalTo(email)).valueChanges();
+  }
+
+  getSingleUser(uid) {
+    return this.db.list('user-details', ref => ref.orderByChild('uid').equalTo(uid)).valueChanges();
   }
 
   checkUserFollower(uid) {

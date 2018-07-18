@@ -21,11 +21,11 @@ import { UserService } from './../../services/user/user.service';
 })
 export class MyCirclePage {
 
-  circle: boolean = false;
+  circleDisplay: boolean = false;
 
-  circleList: Array<any>;
+  circleList: Observable<any>;
 
-  userDetails:  Array<any>;
+  userDetails: Observable<any>;
 
   followerStr: string = "Show only Followers";
 
@@ -34,18 +34,26 @@ export class MyCirclePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private circleS: CircleService, private userS: UserService, private afAuth: AngularFireAuth) {
   }
 
-  ionViewWillLoad() {
-    let loading = this.loadingCtrl.create({content : "Loading..."});
-    loading.present();
-    this.circleS.getCircleList()
-      .subscribe(res => {
-          this.circleList = res;
-          loading.dismissAll();
+  ionViewDidLoad() {
+    this.circleList = this.circleS.getCircleList()
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key,
+          ...c.payload.val(),
+        }));
+      });
+
+    this.userDetails = this.userS.getUserDetails()
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key,
+          ...c.payload.val(),
+        }));
       });
   }
 
   updateCircleList() {
-    if(this.circle == true) {
+    if(this.circleDisplay == true) {
       this.followerStr = "Show only Followings";
     } else {
       this.followerStr = "Show only Followers";

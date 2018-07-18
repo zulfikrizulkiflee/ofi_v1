@@ -45,28 +45,8 @@ export class AddCirclePage {
         .subscribe(res => {
           loading.dismissAll();
           this.usersFound = res;
-          
-          // this.circleS.checkUserFollower(this.usersFound.uid)
-          //   .subscribe(found => {
-          //     console.log(found.length);
-          //   });
         });
     }
-    // 
-    // if(this.searchUser != this.email) {
-    //   this.circleS.searchUser(this.searchUser)
-    //    .subscribe(queriedItems => {
-    //       this.users.forEach(function(user) {
-    //         if (user.follower_uid == queriedItems[0].uid) {
-    //           queriedItems[0].isAdded = true;
-    //         } else {
-    //           queriedItems[0].isAdded = false;
-    //         }
-    //       })
-    //       this.usersFound = queriedItems;
-    //       loading.dismissAll();
-    //     });
-    // } 
   }
 
   onClear(evt) {
@@ -74,33 +54,33 @@ export class AddCirclePage {
   }
 
   addIntoCircle(user) {
-    // let loading = this.loadingCtrl.create({content : "Processing..."});
-    // loading.present();
-    // let alert = this.alertCtrl.create({
-    //     title: 'Add User',
-    //     subTitle: 'Confirm to add user into your circle?',
-    //     enableBackdropDismiss: false,
-    //     buttons: [
-    //       {
-    //         text: 'Cancel',
-    //         role: 'cancel',
-    //         handler: () => {
-    //           loading.dismissAll();
-    //         }
-    //       },
-    //       {
-    //         text: 'Okay',
-    //         handler: () => {
-    //           this.circleS.addIntoCircle(user)
-    //             .then(function(){
-    //               loading.dismissAll();
-    //             });
-    //           this.navCtrl.pop();
-    //         }
-    //       }
-    //     ]
-    //   });
-    //   alert.present();
+    let loading = this.loadingCtrl.create({content : "Processing..."});
+    loading.present();
+    let alert = this.alertCtrl.create({
+        title: 'Add User',
+        subTitle: 'Confirm to add user into your circle?',
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              loading.dismissAll();
+            }
+          },
+          {
+            text: 'Okay',
+            handler: () => {
+              this.circleS.addIntoCircle(user)
+                .then(function(){
+                  loading.dismissAll();
+                });
+              this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      alert.present();
   }
 
 }
