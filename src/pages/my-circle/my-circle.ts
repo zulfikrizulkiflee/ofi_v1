@@ -40,7 +40,6 @@ export class MyCirclePage {
     // loading.dismissAll();
     this.circleList = this.circleS.getCircleList()
       .map(changes => {
-        let username;
         return changes.map(c => ({
           key: c.payload.key,
           ...c.payload.val(),

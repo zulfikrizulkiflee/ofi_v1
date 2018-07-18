@@ -48,7 +48,7 @@ export class LoginPage {
           loading.dismissAll();
           this.alertS.show('Error!', error.message);
         })
-        } else {
+    } else {
       if (user.email == undefined || user.password == undefined) {
         let alert = this.alertCtrl.create({
           title: 'Error!',
