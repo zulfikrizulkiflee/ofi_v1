@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { User } from './../../models/user/user.model';
 import { Circle } from './../../models/user/user.model';
@@ -36,8 +38,8 @@ export class CircleService {
     return this.db.list('user-details', ref => ref.orderByChild('email').equalTo(email)).valueChanges();
   }
 
-  getSingleUser(uid) {
-    return this.db.list('user-details', ref => ref.orderByChild('uid').equalTo(uid)).valueChanges();
+  getSingleUser(user_uid) {
+    return this.db.list('user-details', ref => ref.orderByChild('uid').equalTo(user_uid)).valueChanges();
   }
 
   checkUserFollower(uid) {

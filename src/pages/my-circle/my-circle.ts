@@ -35,8 +35,12 @@ export class MyCirclePage {
   }
 
   ionViewDidLoad() {
+    // let loading = this.loadingCtrl.create({content : "Loading..."});
+    // loading.present();
+    // loading.dismissAll();
     this.circleList = this.circleS.getCircleList()
       .map(changes => {
+        let username;
         return changes.map(c => ({
           key: c.payload.key,
           ...c.payload.val(),
