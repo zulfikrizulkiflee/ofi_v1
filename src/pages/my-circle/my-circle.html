@@ -27,6 +27,7 @@
         <ion-avatar item-start>
           <img src="assets/imgs/default_user.jpg">
         </ion-avatar>
+        <!-- {{circle.username}} -->
         <h2 *ngFor="let user of userDetails | async">
           <h5 *ngIf="user.uid == circle.follower_uid">{{ user.name }}</h5>
         </h2>

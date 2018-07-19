@@ -36,7 +36,7 @@ export class LoginPage {
   ) {}
 
   async login(user: User) {
-    if (user.email != undefined && user.password != undefined || user.email != "" || user.password != "") {
+    if (user.email != undefined && user.password != undefined && user.email != "" && user.password != "") {
       let loading = this.loadingCtrl.create({content : "Loging in..."});
       loading.present();
       this.userS.login(user)
