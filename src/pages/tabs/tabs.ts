@@ -37,7 +37,7 @@ export class TabsPage {
     this.orderS.getOrderDetails()
       .subscribe(changes => {
           return changes.map(c => {
-            if (c.payload.val().status == "New") {
+            if (c.payload.val().status && c.payload.val().status == "New") {
               this.count++;
             }
           })
