@@ -31,7 +31,8 @@ export class UserService {
     const userDetails = {
       uid: this.afAuth.auth.currentUser.uid,
       name: user.name,
-      email: user.email
+      email: user.email,
+      created_date: new Date().toISOString()
     };
 
     return this.userDetailsRef.push(userDetails);

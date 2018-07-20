@@ -33,18 +33,14 @@ export class TabsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private orderS: OrderService, private afAuth: AngularFireAuth) {
   }
 
-  ionViewDidLoad() {
-    this.orders = this.orderS.getOrderDetails()
-      .map(changes => {
-        return changes.map(c => 
-        // {
-        //   this.count++;
-        // }
-          ({
-            key: c.payload.key,
-            ...c.payload.val(),
+  ionViewWillLoad() {
+    this.orderS.getOrderDetails()
+      .subscribe(changes => {
+          return changes.map(c => {
+            if (c.payload.val().status == "New") {
+              this.count++;
+            }
           })
-        );
       });
   }
 

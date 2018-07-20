@@ -47,7 +47,15 @@ export class CircleService {
     return this.db.list('circle', ref => ref.orderByChild('follower_uid').equalTo(uid)).valueChanges();
   }
 
-  editUser(user: User) {
-    return this.circleDetailsRef.update(user.key, user);
+  blockUser(circle_key) {
+    return this.circleDetailsRef.update(circle_key, {status: "Blocked"});
+  }
+
+  unblockUser(circle_key) {
+    return this.circleDetailsRef.update(circle_key, {status: "Active"});
+  }
+
+  removeUser(circle_key) {
+    return this.circleDetailsRef.remove(circle_key);
   }
 }

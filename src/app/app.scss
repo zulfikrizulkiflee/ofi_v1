@@ -43,3 +43,16 @@ ion-icon {
 .searchbar-clear-icon {
   margin-top: 0;
 }
+
+.text {
+  &-pass {
+    color: map-get($colors, primary) !important;
+  }
+  &-danger {
+    color: map-get($colors, danger) !important;
+  }
+
+  &-warning {
+    color: map-get($colors, warning) !important;
+  }
+}

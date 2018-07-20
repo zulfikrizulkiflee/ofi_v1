@@ -4,6 +4,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { CircleService } from './../../services/circle/circle.service';
 
+import { ToastService } from './../../services/component/toast.service';
+
 /**
  * Generated class for the AddCirclePage page.
  *
@@ -27,7 +29,7 @@ export class AddCirclePage {
   email = this.afAuth.auth.currentUser.email;
   public uid = this.afAuth.auth.currentUser.uid;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private circleS: CircleService, private afAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private circleS: CircleService, private afAuth: AngularFireAuth, private toast: ToastService) {
   }
 
   ionViewDidLoad() {
@@ -86,6 +88,7 @@ export class AddCirclePage {
                 .then(function(){
                   loading.dismissAll();
                 });
+              this.toast.show(user.name + ' added!');
               this.navCtrl.pop();
             }
           }

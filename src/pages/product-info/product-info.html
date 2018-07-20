@@ -27,6 +27,7 @@
     </div>
     <div>
       <h4>RM{{product.price}}</h4>
+      <p>Created on {{ product.date | date: 'MMM dd yyyy hh:mm a' }}</p>
       <p>{{product.description}}</p>
       <h5 *ngIf="product.variant">Variants</h5>
       <ion-item *ngFor="let variant of product.variant; let i= index">

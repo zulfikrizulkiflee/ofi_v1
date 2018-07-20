@@ -22,34 +22,40 @@
     <ion-toggle [(ngModel)]="circleDisplay" (ionChange)="updateCircleList()"></ion-toggle>
   </ion-item>
   <div [hidden]="circleDisplay == true">
+    <!-- <ion-item>{{ (circleList | async)?.length }}</ion-item> -->
     <ion-list *ngFor="let circle of circleList | async">
-      <ion-item *ngIf="circle.followee_uid == uid">
-        <ion-avatar item-start>
-          <img src="assets/imgs/default_user.jpg">
-        </ion-avatar>
-        <!-- {{circle.username}} -->
-        <h2 *ngFor="let user of userDetails | async">
-          <h5 *ngIf="user.uid == circle.follower_uid">{{ user.name }}</h5>
-        </h2>
-        <!-- <h2>
-          <h5>{{ circle.follower_uid }}</h5>
-        </h2> -->
-      </ion-item>
+      <div *ngFor="let user of userDetails | async">
+        <ion-item *ngIf="circle.followee_uid == uid && user.uid == circle.follower_uid" (click)="editCircle('follower', circle, user.name)">
+          <ion-avatar item-start>
+            <img src="assets/imgs/default_user.jpg">
+          </ion-avatar>
+          <!-- {{circle.username}} -->
+          <h2>
+            <h5>{{ user.name }}<span class="text-warning" [hidden]="circle.status != 'Blocked'">{{ circle.status }}</span></h5>
+          </h2>
+          <!-- <h2>
+            <h5>{{ circle.follower_uid }}</h5>
+          </h2> -->
+        </ion-item>
+      </div>
     </ion-list>
   </div>
   <div [hidden]="circleDisplay == false">
     <ion-list *ngFor="let circle of circleList | async">
-      <ion-item  *ngIf="circle.follower_uid == uid">
-        <ion-avatar item-start>
-          <img src="assets/imgs/default_user.jpg">
-        </ion-avatar>
-        <h2 *ngFor="let user of userDetails | async">
-          <h5 *ngIf="user.uid == circle.followee_uid">{{ user.name }}</h5>
-        </h2>
-        <!-- <h2>
-          <h5>{{ circle.followee_uid }}</h5>
-        </h2> -->
-      </ion-item>
+      <div *ngFor="let user of userDetails | async">
+        <ion-item *ngIf="circle.follower_uid == uid && user.uid == circle.followee_uid" (click)="editCircle('followee', circle, user.name)">
+          <ion-avatar item-start>
+            <img src="assets/imgs/default_user.jpg">
+          </ion-avatar>
+          <!-- {{circle.username}} -->
+          <h2>
+            <h5>{{ user.name }}<span class="text-warning" [hidden]="circle.status != 'Blocked'">{{ circle.status }}</span></h5>
+          </h2>
+          <!-- <h2>
+            <h5>{{ circle.follower_uid }}</h5>
+          </h2> -->
+        </ion-item>
+      </div>
     </ion-list>
   </div>
 </ion-content>

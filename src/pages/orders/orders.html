@@ -8,9 +8,9 @@
 
   <ion-navbar color="primary">
     <ion-title>Orders</ion-title>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button (click)="addOrder()"><ion-icon name="add"></ion-icon></button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -30,7 +30,7 @@
           <span *ngIf="order.status === 'Processed'" class="status-bullet processed"></span>
         </h2>
         <h3>{{ order.product_name }}</h3>
-        <p>{{ order.total_quantity }} pcs<span>{{ order.date }}</span></p>
+        <p>{{ order.total_quantity }} pcs<span>{{ order.date | date: 'MMM dd yyyy hh:mm a' }}</span></p>
       </ion-item>
     </div>
   </div>

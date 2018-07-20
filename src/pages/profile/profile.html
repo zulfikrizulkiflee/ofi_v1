@@ -20,6 +20,8 @@
   <div *ngFor="let userD of user | async">
     <ion-list *ngIf="userD.uid === uid">
 
+      <img class="user-img" src="assets/imgs/default_user.jpg">
+
       <ion-item>
 
         Name: {{userD.name}}
@@ -35,6 +37,30 @@
       <ion-item>
 
         Phone Number: {{userD.phone}}
+
+      </ion-item>
+
+      <ion-item>
+
+        Member since: {{userD.created_date | date: 'MMM dd yyyy hh:mm a'}}
+
+      </ion-item>
+
+      <ion-item>
+
+        Status: {{userD.status}}
+
+      </ion-item>
+
+      <ion-item>
+
+        Plan: {{userD.plan}}
+
+      </ion-item>
+
+      <ion-item>
+
+        Expired: {{userD.expired_date}}
 
       </ion-item>
 

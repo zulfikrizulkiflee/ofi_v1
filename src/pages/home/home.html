@@ -8,7 +8,7 @@
       <button ion-button (click)="openOption()"><ion-icon name="more"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
-  <ion-segment [(ngModel)]="miniReport">
+  <!-- <ion-segment [(ngModel)]="miniReport">
     <ion-segment-button value="today">
       Today
     </ion-segment-button>
@@ -18,16 +18,61 @@
     <ion-segment-button value="month">
       Month
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment> -->
 </ion-header>
 
 <ion-content>
 
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+  </ion-refresher> -->
 
-  <div [ngSwitch]="miniReport">
+  <ion-card>
+        <ion-card-header>
+          <h1>RM 12345</h1>
+          <h5>Sales</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let sale of tsales">
+            <h5>{{sale.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="sale.width+'%'">RM {{sale.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <h1>25</h1>
+          <h5>Orders</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let order of torders">
+            <h5>{{order.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="order.width+'%'">{{order.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <h1>25</h1>
+          <h5>Completed Orders</h5>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="progress-wrapper" *ngFor="let complete of tcompletes">
+            <h5>{{complete.name}}</h5>
+            <div class="progress-bar">
+              <span [style.width]="complete.width+'%'">{{complete.value}}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+  <!-- <div [ngSwitch]="miniReport">
     <ion-list *ngSwitchCase="'today'">
       <ion-card>
         <ion-card-header>
@@ -168,5 +213,5 @@
         </ion-card-content>
       </ion-card>
     </ion-list>
-  </div>
+  </div> -->
 </ion-content>
