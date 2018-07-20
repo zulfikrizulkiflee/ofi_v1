@@ -34,14 +34,14 @@ export class TabsPage {
   }
 
   ionViewWillLoad() {
-    this.orderS.getOrderDetails()
-      .subscribe(changes => {
-          return changes.map(c => {
-            if (c.payload.val().status && c.payload.val().status == "New") {
-              this.count++;
-            }
-          })
-      });
+    // this.orderS.getOrderDetails()
+    //   .subscribe(changes => {
+    //       return changes.map(c => {
+    //         if (c.payload.val().status == "New") {
+    //           this.count++;
+    //         }
+    //       })
+    //   });
   }
 
 }
