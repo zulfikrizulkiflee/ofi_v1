@@ -53,7 +53,7 @@ export class AddCirclePage {
           } else {
             this.message = "";
             this.users.forEach(a => {
-              if(a.payload.val().followee_uid == this.usersFound[0].uid || a.payload.val().follower_uid == this.usersFound[0].uid) {
+              if((a.payload.val().followee_uid == this.usersFound[0].uid && a.payload.val().follower_uid == this.uid) || (a.payload.val().follower_uid == this.usersFound[0].uid && a.payload.val().followee_uid == this.uid)) {
                 this.usersFound[0].isAdded = true;
               }
             });

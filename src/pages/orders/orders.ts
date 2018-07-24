@@ -21,11 +21,6 @@ import { OrderService } from './../../services/order/order.service';
 })
 export class OrdersPage {
 
-  // orders: any = [
-  //   { id: 1, name: 'Ahmad', brand: 'FLEUR', product: 'Car Perfume', quantity: 3,amount: 'RM 123', time: '8 Nov, 9:09 AM', status: 'new' },
-  //   { id: 2, name: 'Kimi', brand: 'OLFactory', product: 'Men Perfume', quantity: 5,amount: 'RM 123', time: '8 Nov, 9:15 AM', status: 'processed' }
-  // ];
-
   orders: Observable<any>;
   users: Observable<any>;
 

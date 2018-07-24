@@ -17,10 +17,10 @@ export class CircleService {
     
   }
 
-  addIntoCircle(user: User) {
+  addIntoCircle(userdata) {
     const circleDetails = {
       followee_uid: this.uid,
-      follower_uid: user.uid,
+      follower_uid: userdata.uid,
       status: 'New'
     };
 

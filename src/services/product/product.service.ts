@@ -30,11 +30,16 @@ export class ProductService {
   }
 
   removeProduct(product: Product) {
+    // console.log(product);
     return this.productDetailsRef.remove(product.key);
   }
 
   getProductDetails() {
     return this.productDetailsRef.snapshotChanges();
+  }
+
+  getUserProducts(user_uid) {
+    return this.db.list('products', ref => ref.orderByChild('uid').equalTo(user_uid)).valueChanges();
   }
 
   editProduct(product: Product) {
