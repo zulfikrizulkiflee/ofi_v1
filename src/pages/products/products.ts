@@ -22,7 +22,7 @@ import { CircleService } from './../../services/circle/circle.service';
 })
 export class ProductsPage {
   products: Observable<any>;
-  circles: any[] = [];
+  public circles: any[] = [];
 
   uid = this.afAuth.auth.currentUser.uid;
 
