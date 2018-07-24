@@ -8,6 +8,8 @@ import 'rxjs/add/operator/map';
 import { ProductService } from './../../services/product/product.service';
 import { CircleService } from './../../services/circle/circle.service';
 
+import { Circle } from '../../models/user/user.model';
+
 /**
  * Generated class for the ProductsPage page.
  *
@@ -22,7 +24,7 @@ import { CircleService } from './../../services/circle/circle.service';
 })
 export class ProductsPage {
   products: Observable<any>;
-  public circles: any[] = [];
+  circles: any[] = [] as Circle;
 
   uid = this.afAuth.auth.currentUser.uid;
 
