@@ -4,6 +4,7 @@ import { AngularFireDatabase} from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import * as _ from 'lodash';
 
 import { ProductService } from './../../services/product/product.service';
 import { CircleService } from './../../services/circle/circle.service';
@@ -23,45 +24,64 @@ import { Product } from '../../models/product/product.model';
   templateUrl: 'products.html',
 })
 export class ProductsPage {
-  products: Observable<any> as Product;
+  products: Observable<any>;
   circles: any[] = [];
+
+  /// Active filter rules
+  filters = {};
 
   uid = this.afAuth.auth.currentUser.uid;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, private afAuth: AngularFireAuth, private productS: ProductService, public modalCtrl: ModalController, private loadingCtrl: LoadingController, private circleS: CircleService) {
   }
 
+  private applyFilters() {
+    this.products = _.filter(this.products, _.conforms(this.filters) )
+  }
+
+  /// filter property by equality to rule
+  filterExact(property: string, rule: any) {
+    this.filters[property] = val => val == rule
+    this.applyFilters()
+  }
+
   ionViewDidEnter() {
     let loading = this.loadingCtrl.create({content : "Loading..."});
     loading.present()
       .then(() => {
-        this.circles = [];
-        this.circleS.checkUserFollowee(this.uid)
-          .subscribe(circles => {
-            circles.map(c => {
-              if(c.follower_uid == this.uid && c.status == "Active") {
-                this.circles.push(c.followee_uid);
-              }
-            })
-          });
+        this.productS.getProductDetails()
+          .subscribe(products => {
+            this.products = products;
+            this.filterExact('uid', this.uid);
+          })
 
-        this.products = this.productS.getProductDetails()
-          .map(products => {
-            return products.filter(p => {
-              if(p.payload.val().uid == this.uid) {
-                return p.payload.val().uid == this.uid;
-              } else if(this.circles.indexOf(p.payload.val().uid) >= 0) {
-                return p.payload.val().uid == this.circles[this.circles.indexOf(p.payload.val().uid)];
-              }   
-            });
-          });
+        // this.circles = [];
+        // this.circleS.checkUserFollowee(this.uid)
+        //   .subscribe(circles => {
+        //     circles.map(c => {
+        //       if(c.follower_uid == this.uid && c.status == "Active") {
+        //         this.circles.push(c.followee_uid);
+        //       }
+        //     })
+        //   });
 
-        this.products = this.products
-          .map(products => {
-            return products.map(p => {
-              return {key: p.payload.key,...p.payload.val()}
-            })
-          });
+        // this.products = this.productS.getProductDetails()
+        //   .map(products => {
+        //     return products.filter(p => {
+        //       if(p.payload.val().uid == this.uid) {
+        //         return p.payload.val().uid == this.uid;
+        //       } else if(this.circles.indexOf(p.payload.val().uid) >= 0) {
+        //         return p.payload.val().uid == this.circles[this.circles.indexOf(p.payload.val().uid)];
+        //       }   
+        //     });
+        //   });
+
+        // this.products = this.products
+        //   .map(products => {
+        //     return products.map(p => {
+        //       return {key: p.payload.key,...p.payload.val()}
+        //     })
+        //   });
 
         loading.dismissAll();
       });

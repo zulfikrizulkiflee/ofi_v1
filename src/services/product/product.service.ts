@@ -35,7 +35,7 @@ export class ProductService {
   }
 
   getProductDetails() {
-    return this.productDetailsRef.snapshotChanges();
+    return this.productDetailsRef.valueChanges();
   }
 
   getUserProducts(user_uid) {
