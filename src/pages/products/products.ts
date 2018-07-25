@@ -24,7 +24,8 @@ import { Product } from '../../models/product/product.model';
   templateUrl: 'products.html',
 })
 export class ProductsPage {
-  products: Observable<any>;
+  // products: Observable<any>;
+  products: any;
   circles: any[] = [];
 
   /// Active filter rules
