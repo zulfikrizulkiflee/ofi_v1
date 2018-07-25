@@ -9,7 +9,7 @@ export class ProductService {
 
   product = {} as Product;
 
-  private productDetailsRef = this.db.list('products');
+  private productDetailsRef = this.db.list<Product>('products');
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
     
@@ -35,7 +35,7 @@ export class ProductService {
   }
 
   getProductDetails() {
-    return this.productDetailsRef.valueChanges();
+    return this.productDetailsRef.snapshotChanges();
   }
 
   getUserProducts(user_uid) {
