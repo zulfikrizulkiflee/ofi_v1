@@ -3,13 +3,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { User } from './../../models/user/user.model';
+import { Circle } from './../../models/user/user.model';
 
 @Injectable()
 export class CircleService {
 
   user = {} as User;
 
-  private circleDetailsRef = this.db.list('circle');
+  private circleDetailsRef = this.db.list<Circle>('circle');
 
   uid = this.afAuth.auth.currentUser.uid;
 
