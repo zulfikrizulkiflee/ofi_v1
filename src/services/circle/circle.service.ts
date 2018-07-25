@@ -10,7 +10,7 @@ export class CircleService {
 
   user = {} as User;
 
-  private circleDetailsRef = this.db.list<Circle>('circle');
+  private circleDetailsRef = this.db.list('circle');
 
   uid = this.afAuth.auth.currentUser.uid;
 
@@ -45,7 +45,7 @@ export class CircleService {
   }
 
   checkUserFollowee(uid) {
-    return this.db.list('circle', ref => ref.orderByChild('follower_uid').equalTo(uid)).valueChanges();
+    return this.db.listt<Circle>('circle', ref => ref.orderByChild('follower_uid').equalTo(uid)).valueChanges();
   }
 
   blockUser(circle_key) {
