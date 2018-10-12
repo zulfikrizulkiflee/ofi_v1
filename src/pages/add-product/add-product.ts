@@ -37,6 +37,10 @@ export class AddProductPage {
   variant = {} as Variant;
   variantArr = [];
 
+  public myPhotosRef: any;
+  public myPhoto: any;
+  public myPhotoURL: any;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -74,7 +78,7 @@ export class AddProductPage {
       targetHeight: 500,
       saveToPhotoAlbum: true
     }).then(imageData => {
-      this.notePicture = imageData;
+      this.myPhoto = imageData;
     }, error => {
       console.log("ERROR -> " + JSON.stringify(error));
     });
