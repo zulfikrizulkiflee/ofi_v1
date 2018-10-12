@@ -90,4 +90,5 @@
         <variable name="MAX_STORE" value="2" />
     </plugin>
     <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
 </widget>

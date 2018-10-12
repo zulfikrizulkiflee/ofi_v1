@@ -1,8 +1,8 @@
 {
   "name": "ofi_v1",
-  "app_id": "362e2ebd",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "362e2ebd"
 }

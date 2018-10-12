@@ -36,7 +36,7 @@ export class OrdersPage {
     ) {
   }
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
     let loading = this.loadingCtrl.create({content : "Loading..."});
     loading.present();
     this.orders = this.orderS.getOrderDetails()

@@ -9,14 +9,14 @@ export class OrderService {
 
   order = {} as Order;
 
-  private orderDetailsRef = this.db.list('orders');
+  private orderDetailsRef = this.db.list<Order>('orders');
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
     
   }
 
   createSingleOrder(order) {
-    const orderDetails = {
+    order = {
       from_uid: this.afAuth.auth.currentUser.uid,
       to_uid: order.to_uid,
       key: order.key,
@@ -29,11 +29,11 @@ export class OrderService {
       status: 'New'
     };
 
-    return this.orderDetailsRef.push(orderDetails);
+    return this.orderDetailsRef.push(order);
   }
 
   createVariantOrder(order) {
-    const orderDetails = {
+    order = {
       from_uid: this.afAuth.auth.currentUser.uid,
       to_uid: order.to_uid,
       key: order.key,
@@ -47,7 +47,7 @@ export class OrderService {
       status: 'New'
     };
 
-    return this.orderDetailsRef.push(orderDetails);
+    return this.orderDetailsRef.push(order);
   }
 
   getOrderDetails() {
