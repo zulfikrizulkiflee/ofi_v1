@@ -22,8 +22,7 @@
       <ion-avatar item-start>
         <img src="assets/imgs/default_user.jpg">
       </ion-avatar>
-      <h2 *ngIf="order.to_uid == uid">{{ order.from_name }}</h2>
-      <h2 *ngIf="order.from_uid == uid">{{ order.to_name }}</h2>
+      <h2>{{ order.from_name }}</h2>
       <h3>{{ order.product_name }}</h3>
       <p>
         {{ order.date | date: 'MMM dd yyyy hh:mm a' }}

@@ -12,8 +12,6 @@ import { UserService } from './../../services/user/user.service';
 import { Product } from '../../models/product/product.model';
 import { Variant } from '../../models/product/product.model';
 
-import { Camera } from 'ionic-native';
-
 
 /**
  * Generated class for the AddProductPage page.
@@ -62,37 +60,6 @@ export class AddProductPage {
       this.variantArr.push(this.variant);
     }
   } 
-
-  takePhoto(){
-    Camera.getPicture({
-      quality : 95,
-      destinationType : Camera.DestinationType.DATA_URL,
-      sourceType : Camera.PictureSourceType.CAMERA,
-      allowEdit : true,
-      encodingType: Camera.EncodingType.PNG,
-      targetWidth: 500,
-      targetHeight: 500,
-      saveToPhotoAlbum: true
-    }).then(imageData => {
-      this.notePicture = imageData;
-    }, error => {
-      console.log("ERROR -> " + JSON.stringify(error));
-    });
-  }
-
-  selectPhoto(): void {
-    Camera.getPicture({
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: Camera.DestinationType.DATA_URL,
-      quality: 100,
-      encodingType: Camera.EncodingType.PNG,
-    }).then(imageData => {
-      this.myPhoto = imageData;
-      this.uploadPhoto();
-    }, error => {
-      console.log("ERROR -> " + JSON.stringify(error));
-    });
-  }
 
   async create(product: Product, username) {
     if (product.name != undefined && product.price != undefined) {
