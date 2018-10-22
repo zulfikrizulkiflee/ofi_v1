@@ -91,8 +91,8 @@ export class AddProductPage {
       quality: 100,
       encodingType: Camera.EncodingType.PNG,
     }).then(imageData => {
-      // this.myPhoto = imageData;
-      // this.uploadPhoto();
+      this.myPhoto = imageData;
+      this.uploadPhoto();
     }, error => {
       console.log("ERROR -> " + JSON.stringify(error));
     });
